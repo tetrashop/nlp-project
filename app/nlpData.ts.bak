@@ -1,0 +1,107 @@
+/**
+ * داده‌های پروژه‌های NLP
+ * آخرین پروژه باید شماره ۲۵۶ باشد
+ */
+
+export interface NLPProject {
+  id: number;
+  title: string;
+  description: string;
+  detailedDescription: string;
+  author: string;
+  category: string;
+  rating: number;
+  progress: number;
+  features: string[];
+  apiEndpoint?: string;
+  documentationUrl?: string;
+  githubUrl?: string;
+  lastUpdated: string;
+  tags: string[];
+  usageExamples: string[];
+  apiKeyRequired: boolean;
+}
+
+export const nlpProjects: NLPProject[] = [
+  {
+    id: 1,
+    title: "پردازش هوشمند متن فارسی",
+    description: "سیستم هوش مصنوعی برای تحلیل و درک متن فارسی",
+    detailedDescription: "این پروژه یک سیستم جامع پردازش زبان طبیعی برای متن‌های فارسی ارائه می‌دهد که قابلیت‌های مختلفی از جمله تحلیل احساسات، خلاصه‌سازی، تشخیص موجودیت‌های نامدار و درک معنایی را پوشش می‌دهد.",
+    author: "تیم تحقیقاتی دانشگاه تهران",
+    category: "پردازش متن",
+    rating: 4.8,
+    progress: 100,
+    features: [
+      "تحلیل احساسات پیشرفته",
+      "خلاصه‌سازی خودکار متن",
+      "تشخیص موجودیت‌های نامدار",
+      "دسته‌بندی موضوعی",
+      "ترجمه ماشینی"
+    ],
+    apiEndpoint: "/api/v1/text-analysis",
+    documentationUrl: "/docs/text-analysis",
+    githubUrl: "https://github.com/example/text-analysis",
+    lastUpdated: "2024-03-15",
+    tags: ["پردازش متن", "هوش مصنوعی", "فارسی"],
+    usageExamples: ["تحلیل نظرات کاربران", "خلاصه‌سازی مقالات", "طبقه‌بندی اسناد"],
+    apiKeyRequired: true
+  },
+  // ... پروژه‌های ۲ تا ۲۵۵
+  {
+    id: 256,
+    title: "سامانه هوشمند پاسخ‌گویی به پرسش‌های پیچیده",
+    description: "سیستم پیشرفته QA برای پاسخ به سوالات تخصصی",
+    detailedDescription: "آخرین و پیشرفته‌ترین پروژه NLP که با استفاده از معماری‌های Transformer پیشرفته قادر به درک سوالات پیچیده و ارائه پاسخ‌های دقیق و مستند است. این سیستم از تکنیک‌های RAG (Retrieval-Augmented Generation) و Fine-tuning روی داده‌های تخصصی فارسی استفاده می‌کند.",
+    author: "آزمایشگاه هوش مصنوعی پیشرفته",
+    category: "پاسخ‌گویی به سوالات",
+    rating: 4.9,
+    progress: 95,
+    features: [
+      "پاسخ‌گویی به سوالات چندگانه",
+      "ارجاع به منابع معتبر",
+      "پشتیبانی از زمینه مکالمه",
+      "تشخیص زبان‌های مختلف",
+      "یادگیری تطبیقی"
+    ],
+    apiEndpoint: "/api/v1/qa-system",
+    documentationUrl: "/docs/qa-system",
+    githubUrl: "https://github.com/example/qa-system",
+    lastUpdated: "2024-03-20",
+    tags: ["QA", "هوش مصنوعی", "پاسخ‌گویی", "پیشرفته"],
+    usageExamples: [
+      "سیستم پشتیبانی هوشمند",
+      "پاسخ به سوالات پزشکی",
+      "مشاوره حقوقی اولیه",
+      "آموزش تعاملی"
+    ],
+    apiKeyRequired: true
+  }
+];
+
+// تابع کمکی برای دریافت پروژه بر اساس ID
+export function getProjectById(id: number): NLPProject | null {
+  return nlpProjects.find(project => project.id === id) || null;
+}
+
+// تابع برای دریافت همه پروژه‌ها
+export function getAllProjects(): NLPProject[] {
+  return nlpProjects;
+}
+
+// تابع برای فیلتر پروژه‌ها بر اساس دسته‌بندی
+export function getProjectsByCategory(category: string): NLPProject[] {
+  return nlpProjects.filter(project => 
+    project.category.toLowerCase() === category.toLowerCase()
+  );
+}
+
+// تابع برای جستجو در پروژه‌ها
+export function searchProjects(query: string): NLPProject[] {
+  const searchTerm = query.toLowerCase();
+  return nlpProjects.filter(project =>
+    project.title.toLowerCase().includes(searchTerm) ||
+    project.description.toLowerCase().includes(searchTerm) ||
+    project.tags.some(tag => tag.toLowerCase().includes(searchTerm))
+  );
+}

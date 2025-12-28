@@ -1,0 +1,55 @@
+Vercel CLI 50.1.3
+Retrieving project…
+Deploying ramin-edjlal-s-projects/tetrashop-projects
+Uploading [--------------------] (0.0B/33.5KB)
+Uploading [=========-----------] (16.4KB/33.5KB)
+Uploading [=================---] (29.1KB/33.5KB)
+Uploading [==================--] (30.3KB/33.5KB)
+Uploading [====================] (33.5KB/33.5KB)
+Inspect: https://vercel.com/ramin-edjlal-s-projects/tetrashop-projects/A63XDWjBuhG8yJutYST7xmp7xSjj [5s]
+Production: https://tetrashop-projects-jfk3b5w9f-ramin-edjlal-s-projects.vercel.app [5s]
+https://tetrashop-projects-jfk3b5w9f-ramin-edjlal-s-projects.vercel.appQueued...
+Queued...
+Building: Running build in Washington, D.C., USA (East) – iad1
+Building: Build machine configuration: 2 cores, 8 GB
+Building: Retrieving list of deployment files...
+Building: Skipping build cache, deployment was triggered without cache.
+Building: Downloading 21 deployment files...
+Building: Warning: Detected "engines": { "node": ">=14.0.0" } in your `package.json` that will automatically upgrade when a new major Node.js Version is released. Learn More: http://vercel.link/node-version
+Building: Running "vercel build"
+Building: Vercel CLI 50.1.3
+Building: Warning: Detected "engines": { "node": ">=14.0.0" } in your `package.json` that will automatically upgrade when a new major Node.js Version is released. Learn More: http://vercel.link/node-version
+Building: Running "install" command: `npm install`...
+Building: added 68 packages, and audited 69 packages in 1s
+Building: 15 packages are looking for funding
+Building: run `npm fund` for details
+Building: found 0 vulnerabilities
+Building: npm error Missing script: "build"
+Building: npm error
+Building: npm error To see a list of scripts, run:
+Building: npm error   npm run
+Building: npm error A complete log of this run can be found in: /vercel/.npm/_logs/2025-12-27T15_37_31_794Z-debug-0.log
+Building: Error: Command "npm run build" exited with 1
+2025-12-27T15:37:26.845Z  Running build in Washington, D.C., USA (East) – iad1
+2025-12-27T15:37:26.850Z  Build machine configuration: 2 cores, 8 GB
+2025-12-27T15:37:26.880Z  Retrieving list of deployment files...
+2025-12-27T15:37:26.887Z  Skipping build cache, deployment was triggered without cache.
+2025-12-27T15:37:27.396Z  Downloading 21 deployment files...
+2025-12-27T15:37:28.918Z  Warning: Detected "engines": { "node": ">=14.0.0" } in your `package.json` that will automatically upgrade when a new major Node.js Version is released. Learn More: http://vercel.link/node-version
+2025-12-27T15:37:28.919Z  Running "vercel build"
+2025-12-27T15:37:29.332Z  Vercel CLI 50.1.3
+2025-12-27T15:37:29.886Z  Warning: Detected "engines": { "node": ">=14.0.0" } in your `package.json` that will automatically upgrade when a new major Node.js Version is released. Learn More: http://vercel.link/node-version
+2025-12-27T15:37:29.889Z  Running "install" command: `npm install`...
+2025-12-27T15:37:31.376Z  
+2025-12-27T15:37:31.377Z  added 68 packages, and audited 69 packages in 1s
+2025-12-27T15:37:31.378Z  
+2025-12-27T15:37:31.378Z  15 packages are looking for funding
+2025-12-27T15:37:31.379Z  run `npm fund` for details
+2025-12-27T15:37:31.379Z  
+2025-12-27T15:37:31.380Z  found 0 vulnerabilities
+2025-12-27T15:37:31.886Z  npm error Missing script: "build"
+2025-12-27T15:37:31.887Z  npm error
+2025-12-27T15:37:31.887Z  npm error To see a list of scripts, run:
+2025-12-27T15:37:31.888Z  npm error   npm run
+2025-12-27T15:37:31.888Z  npm error A complete log of this run can be found in: /vercel/.npm/_logs/2025-12-27T15_37_31_794Z-debug-0.log
+2025-12-27T15:37:31.896Z  Error: Command "npm run build" exited with 1

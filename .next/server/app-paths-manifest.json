@@ -1,0 +1,11 @@
+{
+  "/_not-found": "app/_not-found.js",
+  "/page": "app/page.js",
+  "/api/subscribe/route": "app/api/subscribe/route.js",
+  "/api/nlp-proxy/route": "app/api/nlp-proxy/route.js",
+  "/dashboard/page": "app/dashboard/page.js",
+  "/services/[serviceName]/page": "app/services/[serviceName]/page.js",
+  "/nlp/[id]/page": "app/nlp/[id]/page.js",
+  "/services/page": "app/services/page.js",
+  "/nlp/page": "app/nlp/page.js"
+}

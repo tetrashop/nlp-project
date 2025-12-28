@@ -1,0 +1,40 @@
+import './globals.css'
+import { Inter } from 'next/font/google'
+
+// استفاده از فونت ساده‌تر و مطمئن‌تر
+const inter = Inter({ subsets: ['latin'] })
+
+export const metadata = {
+  title: 'پلتفرم NLP - TetraSaaS',
+  description: 'پروژه‌های پردازش زبان طبیعی',
+}
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="fa" dir="rtl">
+      <head>
+        {/* اضافه کردن متاتگ دیدگاه برای موبایل */}
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+      </head>
+      <body className={`${inter.className} bg-gray-50 min-h-screen`} style={{direction: 'rtl', textAlign: 'right'}}>
+        {/* هدر بسیار ساده */}
+        <header style={{padding: '1rem', backgroundColor: 'white', borderBottom: '1px solid #e5e7eb'}}>
+          <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+            <div style={{fontWeight: 'bold'}}>🧠 پلتفرم TetraSaaS</div>
+            <nav style={{display: 'flex', gap: '1rem'}}>
+              <a href="/" style={{color: '#3b82f6'}}>خانه</a>
+              <a href="/nlp" style={{color: '#3b82f6', fontWeight: '500'}}>پروژه‌ها</a>
+            </nav>
+          </div>
+        </header>
+        <main style={{padding: '1rem'}}>
+          {children}
+        </main>
+        {/* فوتر ساده */}
+        <footer style={{padding: '1rem', textAlign: 'center', fontSize: '0.875rem', color: '#6b7280'}}>
+          <p>© ۱۴۰۳ TetraSaaS</p>
+        </footer>
+      </body>
+    </html>
+  )
+}
