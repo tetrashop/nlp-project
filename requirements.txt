@@ -1,0 +1,2 @@
+# NLP Project Dependencies
+# (Currently no external packages required)

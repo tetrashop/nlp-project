@@ -1,0 +1,6 @@
+{
+  "language": "fa",
+  "max_length": 512,
+  "enable_cache": true,
+  "log_level": "INFO"
+}
