@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>پروژه جامع NLP فارسی و انگلیسی</title>
+    <style>
+        body { font-family: Tahoma, sans-serif; margin: 2em; background: #f9f9f9; direction: rtl; }
+        h1 { color: #2c3e50; }
+        code { background: #eee; padding: 2px 5px; border-radius: 4px; }
+        pre { background: #eee; padding: 1em; border-radius: 8px; direction: ltr; text-align: left; }
+        .container { max-width: 800px; margin: auto; background: white; padding: 2em; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        a { color: #2980b9; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧠 پروژه جامع پردازش زبان طبیعی (NLP)</h1>
+        <p>این مخزن حاصل توسعهٔ خودکار یک پایه NLP با تمرکز بر زبان فارسی و انگلیسی است. الگوریتم‌های اصلی بدون هیچ وابستگی خارجی پیاده‌سازی شده‌اند.</p>
+        <h2>📦 قابلیت‌ها</h2>
+        <ul>
+            <li>تحلیل احساسات (مثبت/منفی/خنثی) با لغت‌نامه‌های فارسی و انگلیسی</li>
+            <li>خلاصه‌سازی استخراجی متن</li>
+            <li>استخراج کلمات کلیدی</li>
+            <li>تصحیح فاصله‌گذاری و نیم‌فاصلهٔ فارسی</li>
+            <li>سیستم گزارش‌گیری (logging) و مدیریت پیکربندی</li>
+        </ul>
+        <h2>⚙️ اجرای سریع</h2>
+        <pre><code>from nlp_enhancements import analyze_sentiment, fix_persian_spacing
+text = "این فیلم فوق‌العاده بود."
+print(analyze_sentiment(text))
+print(fix_persian_spacing("می خواهم   به  خانه  بروم"))</code></pre>
+        <h2>📁 فایل‌های اصلی</h2>
+        <ul>
+            <li><code>nlp_enhancements.py</code> – الگوریتم‌های NLP</li>
+            <li><code>logger.py</code> – سیستم لاگ</li>
+            <li><code>config.py</code> – مدیریت تنظیمات</li>
+            <li><code>README.md</code> – توضیحات کامل</li>
+        </ul>
+        <h2>👤 توسعه‌دهنده</h2>
+        <p>Ramin Edjlal</p>
+        <p><a href="https://github.com/tetrashop/nlp-project">مشاهدهٔ کد منبع در گیت‌هاب</a></p>
+    </div>
+</body>
+</html>
