@@ -55,3 +55,6 @@ print(analyze_sentiment(text))
 ---
 
 <p dir="rtl" align="center">ساخته‌شده با 💻 + ☕ در Termux | بهار ۱۴۰۵</p>
+
+## 🌐 نسخهٔ زنده
+[مشاهده پروژه NLP](https://tetrashop.github.io/nlp-project)
