@@ -9,14 +9,12 @@
         body { font-family: 'Tahoma', sans-serif; background: linear-gradient(135deg, #1e3c72, #2a5298); color: #fff; margin: 0; padding: 20px; }
         .container { max-width: 800px; margin: auto; background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); border-radius: 20px; padding: 30px; box-shadow: 0 8px 32px rgba(0,0,0,0.3); }
         h1 { text-align: center; margin-bottom: 30px; font-size: 2em; color: #ffd700; }
-        textarea, input[type="text"] { width: 100%; padding: 12px; border-radius: 12px; border: none; font-size: 16px; margin-bottom: 20px; }
-        textarea { height: 150px; resize: vertical; }
+        textarea { width: 100%; padding: 12px; border-radius: 12px; border: none; font-size: 16px; margin-bottom: 20px; height: 150px; resize: vertical; }
         .btn-group { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; }
-        button { flex: 1; min-width: 120px; padding: 12px; border: none; border-radius: 12px; font-size: 16px; cursor: pointer; transition: transform 0.2s; background: #ffd700; color: #1e3c72; font-weight: bold; }
+        button { flex: 1; min-width: 120px; padding: 12px; border: none; border-radius: 12px; font-size: 16px; cursor: pointer; background: #ffd700; color: #1e3c72; font-weight: bold; transition: transform 0.2s; }
         button:hover { transform: scale(1.03); }
         .output-box { background: rgba(0,0,0,0.3); border-radius: 12px; padding: 15px; white-space: pre-wrap; word-break: break-word; margin-top: 10px; }
         .label { font-weight: bold; color: #ffd700; margin-bottom: 5px; }
-        hr { border-color: rgba(255,255,255,0.2); margin: 25px 0; }
         footer { text-align: center; margin-top: 30px; opacity: 0.8; }
     </style>
 </head>
@@ -36,20 +34,23 @@
         <span style="opacity:0.7;">نتیجه اینجا نمایش داده می‌شود...</span>
     </div>
 </div>
-<footer>
-    ساخته‌شده با ❤️ و JavaScript – <span id="year"></span> | پروژه NLP
-</footer>
+<footer>ساخته‌شده با ❤️ و JavaScript – <span id="year"></span> | پروژه NLP</footer>
 
 <script>
-    // ========== الگوریتم‌های NLP (همان ماژول‌های پایتون) ==========
-    const POS_PERSIAN = new Set(["خوب","عالی","زیبا","دوست‌داشتنی","مثبت","شاد","قوی"]);
-    const NEG_PERSIAN = new Set(["بد","زشت","ناراحت","منفی","ضعیف","غمگین","ترسناک"]);
-    const POS_ENGLISH = new Set(["good","great","excellent","happy","positive","strong"]);
-    const NEG_ENGLISH = new Set(["bad","terrible","sad","negative","weak","ugly"]);
-    const STOPWORDS = new Set(["the","is","in","at","of","و","که","در","به","از","با"]);
+    // ---------- ثابت‌ها ----------
+    const POS_PERSIAN = new Set(["خوب","عالی","زیبا","دوست‌داشتنی","مثبت","شاد","قوی","محشر","فوق‌العاده","بی‌نظیر","لذت‌بخش","آرامش","موفق","پرانرژی","خوشحال"]);
+    const NEG_PERSIAN = new Set(["بد","زشت","ناراحت","منفی","ضعیف","غمگین","ترسناک","وحشتناک","ناراضی","خسته","ناامید","عصبی","بی‌ارزش","نگران","متاسف"]);
+    const POS_ENGLISH = new Set(["good","great","excellent","happy","positive","strong","fantastic","wonderful","amazing","love","beautiful","nice","best","awesome"]);
+    const NEG_ENGLISH = new Set(["bad","terrible","sad","negative","weak","ugly","horrible","awful","hate","poor","worst","disappointed","angry","upset"]);
+    const STOPWORDS = new Set(["the","is","in","at","of","and","a","to","it","on","for","with","و","که","در","به","از","با","بر","برای","تا","است","را","هم","این","آن","یک","خود","چه","اما","یا","اگر","همه","نیز","بود"]);
+
+    // استخراج کلمات با پشتیبانی از نیم‌فاصله (\u200c)
+    function getWords(text) {
+        return text.toLowerCase().match(/[\w\u0600-\u06FF\u200c]+/g) || [];
+    }
 
     function analyzeSentiment(text) {
-        const words = new Set(text.toLowerCase().match(/\w+/g) || []);
+        const words = new Set(getWords(text));
         let pos = 0, neg = 0;
         words.forEach(w => {
             if (POS_PERSIAN.has(w) || POS_ENGLISH.has(w)) pos++;
@@ -62,7 +63,7 @@
     }
 
     function extractKeywords(text, topN = 5) {
-        const words = text.toLowerCase().match(/\w+/g) || [];
+        const words = getWords(text);
         const filtered = words.filter(w => !STOPWORDS.has(w) && w.length > 2);
         const freq = {};
         filtered.forEach(w => freq[w] = (freq[w] || 0) + 1);
@@ -74,65 +75,50 @@
     function extractiveSummary(text, numSentences = 3) {
         const sentences = text.split(/(?<=[.!?؟])\s+/);
         if (sentences.length <= numSentences) return text;
-        const words = text.toLowerCase().match(/\w+/g) || [];
+        const words = getWords(text);
         const wordFreq = {};
         words.forEach(w => wordFreq[w] = (wordFreq[w] || 0) + 1);
         const maxFreq = Math.max(...Object.values(wordFreq), 1);
         const weights = {};
         Object.entries(wordFreq).forEach(([w, f]) => weights[w] = f / maxFreq);
-        const scored = sentences.map(s => {
-            const sentWords = s.toLowerCase().match(/\w+/g) || [];
-            const score = sentWords.reduce((sum, w) => sum + (weights[w] || 0), 0);
-            return { sentence: s, score };
+        const scored = sentences.map((s, i) => {
+            const sentWords = getWords(s);
+            const tfScore = sentWords.reduce((sum, w) => sum + (weights[w] || 0), 0);
+            const positionScore = i === 0 ? 1.0 : 0.8;
+            return { sentence: s, score: tfScore * positionScore };
         });
         scored.sort((a, b) => b.score - a.score);
         const best = scored.slice(0, numSentences).map(x => x.sentence);
-        // حفظ ترتیب اصلی
-        const result = sentences.filter(s => best.includes(s));
-        return result.join(" ");
+        return sentences.filter(s => best.includes(s)).join(" ");
     }
 
     function fixPersianSpacing(text) {
         text = text.replace(/ +/g, " ");
-        // می‌خواهم به‌خانه بروم (نیم‌فاصله بعد از می/نمی/به/از/در/با)
-        text = text.replace(/\b(می|نمی)\s+/g, "$1‌");
-        text = text.replace(/\b(به|از|در|با)\s+/g, "$1‌");
+        text = text.replace(/\b(می|نمی)\s+(?=[\w\u0600-\u06FF\u200c])/g, "$1‌");
+        text = text.replace(/\b(به|از|در|با|بر|برای|بی|تا)\s+(?=[\w\u0600-\u06FF\u200c])/g, "$1‌");
+        text = text.replace(/\b([\w\u0600-\u06FF\u200c]+)\s+(ها|های|تر|ترین)\b/g, "$1‌$2");
         return text;
     }
 
-    // ========== اتصال به رابط کاربری ==========
     function doSentiment() {
         const text = document.getElementById("inputText").value;
         const res = analyzeSentiment(text);
-        document.getElementById("result").innerHTML = `
-            <div class="label">📊 تحلیل احساسات</div>
-            برچسب: ${res.label} | امتیاز: ${res.score}<br>
-            کلمات مثبت: ${res.positive} | کلمات منفی: ${res.negative}
-        `;
+        document.getElementById("result").innerHTML = `<div class="label">📊 تحلیل احساسات</div>برچسب: ${res.label} | امتیاز: ${res.score}<br>کلمات مثبت: ${res.positive} | کلمات منفی: ${res.negative}`;
     }
     function doKeywords() {
         const text = document.getElementById("inputText").value;
         const keywords = extractKeywords(text);
-        document.getElementById("result").innerHTML = `
-            <div class="label">🔑 کلمات کلیدی</div>
-            ${keywords.join("، ")}
-        `;
+        document.getElementById("result").innerHTML = `<div class="label">🔑 کلمات کلیدی</div>${keywords.join("، ") || "هیچ کلمه‌ای یافت نشد"}`;
     }
     function doSummary() {
         const text = document.getElementById("inputText").value;
         const summary = extractiveSummary(text, 2);
-        document.getElementById("result").innerHTML = `
-            <div class="label">📝 خلاصه</div>
-            ${summary}
-        `;
+        document.getElementById("result").innerHTML = `<div class="label">📝 خلاصه</div>${summary}`;
     }
     function doSpacing() {
         const text = document.getElementById("inputText").value;
         const fixed = fixPersianSpacing(text);
-        document.getElementById("result").innerHTML = `
-            <div class="label">✍️ تصحیح فاصله‌گذاری</div>
-            ${fixed}
-        `;
+        document.getElementById("result").innerHTML = `<div class="label">✍️ تصحیح فاصله‌گذاری</div>${fixed}`;
     }
     document.getElementById("year").textContent = new Date().getFullYear();
 </script>
